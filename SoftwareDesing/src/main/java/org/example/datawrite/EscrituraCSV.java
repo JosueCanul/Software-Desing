@@ -6,36 +6,28 @@ import java.io.File;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-public class EscrituraCSV<E> implements EscrituraArchivo {
-    private String direction = "record.csv";
+public class EscrituraCSV implements EscrituraArchivo {
 
-    public EscrituraCSV(){
+    private String direction;
 
-    }
+
     public EscrituraCSV(String direction){
         File file = new File(direction);
         this.direction = direction;
     }
 
 
-    public void setRecords(ArrayList<Student> updatedStudents){
+    public <E> void setDataCsv(ArrayList<E> items){
         try (PrintWriter printWriter = new PrintWriter(new File(direction))){
-            for (Student student : updatedStudents){
-                printWriter.println(student.toString());
+
+            for(E item: items){
+                printWriter.append(item.toString() + "\n");
             }
         }catch (Exception e){
             System.out.println(e);
         }
     }
 
-    public void setRecordsSimplified(ArrayList<Student> updatedStudents){
-        try (PrintWriter printWriter = new PrintWriter(new File(direction))){
-            for (Student student : updatedStudents){
-                printWriter.println(student.getMatricula() + "," + student.getMateria() + "," + student.getCalificacion());
-            }
-        }catch (Exception e){
-            System.out.println(e);
-        }
-    }
+
 
 }

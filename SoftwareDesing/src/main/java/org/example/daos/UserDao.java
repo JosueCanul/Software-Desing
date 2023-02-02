@@ -9,14 +9,16 @@ import org.example.models.User;
 import java.util.ArrayList;
 
 public class UserDao {
-    private String direction = "users.cvs";
+    private final String direction = "users.csv";
     private final EscrituraArchivo escrituraArchivo;
 
     private final LecturaArchivo lecturaArchivo;
 
+
+
     public UserDao() {
-        this.escrituraArchivo = new EscrituraCSV();
-        this.lecturaArchivo = new LecturaCSV("users.csv");
+        this.escrituraArchivo = new EscrituraCSV(direction);
+        this.lecturaArchivo = new LecturaCSV(direction);
     }
 
     public ArrayList<User> returnUsers(){
@@ -29,19 +31,17 @@ public class UserDao {
         return  usersArrayList;
     }
     public void setUsers(ArrayList<User> usersForSet){
-        ArrayList<User> usersFile = returnUsers();
-        for(User user: usersForSet){
-            usersFile.add(user);
-        }
+        escrituraArchivo.setDataCsv(usersForSet);
     }
 
-    public static void main(String[] args) {
-        UserDao userDao = new UserDao();
-
-        ArrayList<User> users = userDao.returnUsers();
-
-        for(User user: users ){
-            System.out.println(user.toString());
-        }
+    public void setNewUsers(ArrayList<User> usersForSet){
+        ArrayList<User> usersFromCSV = returnUsers();
+        usersFromCSV.addAll(usersForSet);
+        escrituraArchivo.setDataCsv(usersFromCSV);
+    }
+    public void setUser(User user){
+        ArrayList<User> usersFromCSV = returnUsers();
+        usersFromCSV.add(user);
+        escrituraArchivo.setDataCsv(usersFromCSV);
     }
 }

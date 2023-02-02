@@ -19,7 +19,7 @@ import java.util.logging.Logger;
  */
 
 //Sacado de https://medium.com/el-acordeon-del-programador/encriptaci%C3%B3n-aes-en-java-ebb81ddf82b#:~:text=El%20primer%20paso%20para%20encriptar,el%20constructor%20de%20la%20clase
-public class Descifrado implements Encriptar, Desencriptar{
+public class Security implements Encriptar, Desencriptar{
 
     private final String secretKeyUs ="bufferScanner";
     private SecretKeySpec crearClave(String clave) {
@@ -57,7 +57,7 @@ public class Descifrado implements Encriptar, Desencriptar{
         } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException |
                  UnsupportedEncodingException |
                  IllegalBlockSizeException | BadPaddingException ex) {
-            Logger.getLogger(Descifrado.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Security.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -77,7 +77,7 @@ public class Descifrado implements Encriptar, Desencriptar{
             return datos;
         } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | IllegalBlockSizeException |
                  BadPaddingException ex) {
-            Logger.getLogger(Descifrado.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Security.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return null;

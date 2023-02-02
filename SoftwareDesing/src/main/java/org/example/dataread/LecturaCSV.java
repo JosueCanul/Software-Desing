@@ -6,10 +6,8 @@ import java.io.*;
 import java.util.Scanner;
 
 public class LecturaCSV implements LecturaArchivo {
-    private String direction = "record.csv";
-    public LecturaCSV(){
+    private String direction;
 
-    }
 
     public  LecturaCSV(String path){
         direction = path;

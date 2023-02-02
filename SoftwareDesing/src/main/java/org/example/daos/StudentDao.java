@@ -4,20 +4,22 @@ import org.example.dataread.LecturaCSV;
 import org.example.datawrite.EscrituraCSV;
 import org.example.models.Student;
 
+import java.io.File;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 public class StudentDao {
 
+    private String direction = "record.csv";
     private LecturaCSV lecturaCSV;
     private EscrituraCSV escrituraCSV;
     public StudentDao(){
-        this.lecturaCSV = new LecturaCSV();
-        this.escrituraCSV = new EscrituraCSV();
+        this.lecturaCSV = new LecturaCSV(direction);
+        this.escrituraCSV = new EscrituraCSV(direction);
     }
 
     public  StudentDao(String direction){
-        this.lecturaCSV = new LecturaCSV();
-        this.escrituraCSV = new EscrituraCSV(direction);
+        this.direction = direction;
     }
 
     public void updateStudentsRecords(int[] updatedRecords){
@@ -28,10 +30,10 @@ public class StudentDao {
                 student.setCalificacion(updatedRecords[record]);
             record++;
         }
-        escrituraCSV.setRecords(students);
+        escrituraCSV.setDataCsv(students);
     }
 
-    private ArrayList<Student>  readStudents(){
+    public ArrayList<Student>  readStudents(){
         String[][] studentsRecords = lecturaCSV.getRecords();
         ArrayList<Student> students = new ArrayList<>();
 
@@ -44,7 +46,19 @@ public class StudentDao {
         return students;
     }
 
-    public void setStudentRecordsSimplified(){
-        escrituraCSV.setRecordsSimplified(readStudents());
+    public void setRecordsSimplified(String dt){
+        String direction = dt + ".csv";
+        ArrayList<Student> students = readStudents();
+        try (PrintWriter printWriter = new PrintWriter(new File(direction))){
+            for (Student student : students){
+                printWriter.println(student.getMatricula() + "," + student.getMateria() + "," + student.getCalificacion());
+            }
+        }catch (Exception e){
+            System.out.println(e);
+        }
     }
+    public void setAllStudents(ArrayList<Student> students){
+        escrituraCSV.setDataCsv(students);
+    }
+
 }
