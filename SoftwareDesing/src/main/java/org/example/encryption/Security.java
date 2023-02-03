@@ -22,6 +22,8 @@ import java.util.logging.Logger;
 public class Security implements Encriptar, Desencriptar{
 
     private final String secretKeyUs ="bufferScanner";
+
+
     private SecretKeySpec crearClave(String clave) {
         try {
             byte[] claveEncriptacion = clave.getBytes("UTF-8");

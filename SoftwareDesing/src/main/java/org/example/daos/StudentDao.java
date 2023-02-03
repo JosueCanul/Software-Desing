@@ -46,7 +46,7 @@ public class StudentDao {
         return students;
     }
 
-    public void setRecordsSimplified(String dt){
+    public void setRecordsSimplifiedCSV(String dt){
         String direction = dt + ".csv";
         ArrayList<Student> students = readStudents();
         try (PrintWriter printWriter = new PrintWriter(new File(direction))){
@@ -57,6 +57,7 @@ public class StudentDao {
             System.out.println(e);
         }
     }
+
     public void setAllStudents(ArrayList<Student> students){
         escrituraCSV.setDataCsv(students);
     }

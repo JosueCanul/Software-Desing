@@ -40,11 +40,5 @@ public class LoginUserController {
 
     }
 
-    public static void main(String[] args) {
-        LoginUserController loginUserController = new LoginUserController();
-
-        loginUserController.loginUser("josuecanul@gmail.com", "potato");
-    }
-
 
 }
